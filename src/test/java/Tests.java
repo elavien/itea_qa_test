@@ -33,7 +33,7 @@ public class Tests {
             webDriver.quit();} }
 
     /**
-     * Verifies that the first search result contains a search query.
+     * Verifies that the first search result contains a search query - checks that the results page has loaded
      * Checks that the number of search queries is 7
      * Checks that each result on the page matches the search query
      * Moves to the second search page
@@ -45,7 +45,7 @@ public class Tests {
     public void searchTest() {
         GooglePage googlePage = PageFactory.initElements(webDriver, GooglePage.class);
         SearchResultsPage resultsPage = googlePage.searsh("ITEA");
-        Assert.assertTrue(resultsPage.getResults().get(0).getText().toLowerCase().contains("itea"));
+        Assert.assertTrue(resultsPage.isResultsLoaded("itea"), "The Results of Search is not loaded");
         int resultsCount = resultsPage.getResultsCount();
         Assert.assertEquals(resultsCount, 7, "The results are not 7");
         Assert.assertTrue(resultsPage.isResultsContain("itea"));
